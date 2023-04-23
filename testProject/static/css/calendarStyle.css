@@ -1,0 +1,296 @@
+html, body{
+  font-family: 'Quicksand', sans-serif;
+  font-size: calc(1vw + 2vh);
+  margin: none;
+
+}
+#monthHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10vw;
+}
+#prev, #next{
+  font-size: calc(2vw + 2vh);
+  background-color: #3443CF;
+  color: white;
+  width: max(5vh, 5vw);
+  height: max(5vh, 5vw);
+  border-radius: 100px;
+  text-align: center;
+}
+#prev:hover, #next:hover{
+  cursor:pointer;
+}
+header{
+  width: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  height: 5rem;
+  margin-bottom: 2rem;
+  background-color: #BFDFF1;
+}
+
+footer {
+  background-color: #BFDFF1;
+  position: relative;
+  overflow: hidden;
+  left: 0;
+  bottom: -5vh;
+  height: 7rem;
+  width: 100%;
+  overflow: hidden;
+}
+#month{
+  display:flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+#month:before{
+content: attr(data-month);
+font-size: 5rem;
+font-weight: bolder;
+}
+#month:after{
+content: attr(data-year);
+font-size: 1vw !important;
+}
+.column{
+  text-align: center;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  --n:  7;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(10px, 100%/var(--n)), 1fr));
+}
+
+#content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  margin-bottom: 10vh;
+  padding: 5vw;
+}
+#content::-webkit-scrollbar {
+width: 0px;
+background: transparent; /* make scrollbar transparent */
+}
+
+.dayCard{
+  display: flex;
+  flex-flow: column;
+  min-width: 10%;
+  font-size: 2rem;
+  min-height: 10vh;
+  height: 12.5rem;
+  max-height: 15vh;
+  margin: .5em;
+  padding: .5em 0;
+  border-radius: .2em;
+  background-color: #BFDFF1;
+  transition: background-color 250ms ease 50ms, color 250ms ease 50ms;
+;
+  overflow: visible;
+}
+.hide{
+  background-color: #2020FF !important;
+  color: white !important;
+}
+.dayCard .day{
+  font-size: .5em;
+}
+.dayCard .date{
+display: flex;
+flex-flow: column;
+}
+.dayCard[data-set-empty="false"]{
+border: #3443CF solid 2px;
+}
+.dayCard[data-set-empty="true"]{
+border: transparent solid 2px;
+}
+.dayCard[data-set-empty="false"]:hover .cardContent, .dayCard[data-set-empty="false"]:active .cardContent, .dayCard[data-set-empty="false"]:focus .cardContent{
+  padding: calc(.5vw + .5vh);
+  font-size: .5em;
+  color: black;
+  background-color: #BFDFF1;
+  border: #3443CF solid 1px;
+  opacity: 100;
+}
+.dayCard[data-set-empty="false"]:hover .cardContent:before{
+content: "📌";
+position: absolute;
+left: -1rem;
+top: -1rem;
+font-size: 2rem;
+object-fit: contain;
+transform: scaleX(-1);
+}
+.dayCard[data-set-empty="false"]:unhover .cardContent .task{
+  font-size: 0;
+  display: none;
+}
+.dayCard[data-set-empty="false"]:hover .cardTitle:before,
+.dayCard[data-set-empty="false"]:active .cardTitle:before,
+.dayCard[data-set-empty="false"]:focus .cardTitle:before{
+  content: "Tasks Assigned";
+  font-size: 1.5rem;
+}
+.dayCard[data-set-empty="false"] .cardTitle:before,
+.dayCard[data-set-empty="false"] .cardTitle:before,
+.dayCard[data-set-empty="false"] .cardTitle:before{
+transition: font-size 10ms ease-out 0ms
+}
+.dayCard[data-set-empty="false"]:hover,
+.dayCard[data-set-empty="false"]:active,
+.dayCard[data-set-empty="false"]:focus{
+  background-color: #3443CF;
+  color: white;
+  position: relative;
+}
+.dayCard[data-set-empty="false"] .date:after{
+content: "🡣";
+font-size: 1rem;
+transition: transform 200ms ease-out 0ms;
+}
+.dayCard[data-set-empty="false"]:hover .date:after{
+content: "🡣";
+font-size: 1rem;
+transform: rotate(180deg);
+} 
+.cardContent{
+  box-shadow: 5px 10px black;
+  margin-top: .5em;
+  z-index: 100000;
+  border-radius: .35em;
+  border: none;
+  background-color: none;
+  opacity: 0;
+  align-self: center;
+  display: flex;
+  flex-flow:column;
+  width: max(100%, calc(5vw + 20vh));
+  position: relative;
+  transition: 
+    background-color 100ms linear 10ms, 
+    border 100ms linear 20ms, 
+    opacity 50ms ease-out 0ms,
+    font-size 50ms ease-in 0ms;
+  font-size: 0rem;
+}
+.cardContent::-webkit-scrollbar {
+width: 0px;
+background: transparent; /* make scrollbar transparent */
+}
+.dayCard ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.task{
+  z-index: 100;
+  border-radius: 5px;
+  margin: .5em;
+  background-color: #3443CF;
+  padding: .5em;
+}
+.task[data-duration="near"], .task[data-duration="near"] a{
+color: gold !important;
+background-color:  #2132c4;
+font-weight: bold;
+}
+.task[data-duration="warning"], .task[data-duration="warning"] a{
+color: red !important;
+background-color: #dFeFFF;
+font-weight: bolder;
+}
+.task[data-duration="warning"], .task[data-duration="warning"] a:after, .task[data-duration="warning"] a:before{
+text-indent: 5px;
+content: '⚠';
+color: red !important;
+background-color: #dFeFFF;
+font-weight: bolder;
+}
+.task[data-duration="safe"], .task[data-duration="safe"] a{
+color: white !important;
+}
+.task a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.task:has(> a:hover){
+  border: 2px solid block;
+}
+.cardTitle:before{
+  content: "Tasks Assigned";
+  transition: 
+    font-size 100ms linear 5ms;
+  font-size: 0;
+  font-weight: bolder;
+}
+.day:before{
+  content:"";
+}
+.mon:before{
+  content:"Mon"
+}
+.tue:before{
+  content:"Tue"
+}
+.wed:before{
+  content:"Wed"
+}
+.thu:before{
+  content:"Thu"
+}
+.fri:before{
+  content:"Fri"
+}
+.sat:before{
+  content:"Sat"
+}
+.sun:before{
+  content:"Sun"
+}
+
+.divider{
+  border: none;
+  border-bottom: black solid .012rem;
+  width: 100%;
+  display: inline-block;
+}
+.divider:before{
+  content: "Week " attr(data-set-nthWeek);
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 700px){
+  .column{
+    --n: 4;
+  }
+}
+@media screen and (max-width: 500px){
+  .column{
+    --n: 2;
+  }
+}
+@media screen and (max-width: 250px){
+  .column{
+    --n: 1;
+  }
+}
+
+@media screen and (max-height: 900px){
+ html, body{
+   font-size: 1vw;
+ }
+ 
+}

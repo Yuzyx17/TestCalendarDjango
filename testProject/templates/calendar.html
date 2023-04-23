@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+  Calendar
+{% endblock title %}
+{% block body %}
+  <div>
+    <header></header>
+    <div id="monthHeader" data-month="0">
+      <button id="prev" onClick="prevMonth()"> < </button>
+      <span id="month" data-month="" data-year=""></span>
+      <button id="next" onClick="nextMonth()"> > </button>
+    </div>
+    <main id="content">
+    </main>
+    <footer></footer>
+  </div>
+  {% endblock body %}
